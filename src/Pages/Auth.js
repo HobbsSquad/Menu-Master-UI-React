@@ -9,6 +9,9 @@ class AuthPage extends Component {
                 <div className="login-header">
                     <h1>Login</h1>
                 </div>
+                <div className="login-main">
+                    
+                </div>
             </div>
         );
     }
