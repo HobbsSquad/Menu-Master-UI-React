@@ -1,0 +1,12 @@
+.day-button {
+    width: 50%;
+    text-align: left;
+}
+
+.day-button-dotw {
+    font-size: 1.5em;
+}
+
+.day-button-date {
+    font-size: 1.25em;
+}

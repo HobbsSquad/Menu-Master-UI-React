@@ -29,10 +29,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  userStatus: state.auth.userStatus,
-  userId: state.auth.userId,
-  token: state.auth.token,
-  tokenExpiration: state.auth.tokenExpiration
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps)(App)
