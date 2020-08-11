@@ -1,0 +1,23 @@
+.day-details-container {
+    width: 50%;
+    float: right;
+}
+
+.day-details-header {
+    text-align: center;
+    border-style: dotted;
+}
+
+.day-details-header-dotw {
+    font-size: 1.5em;
+}
+
+.day-details-header-date {
+    font-size: 1.25em;
+}
+
+.day-details-empty {
+    text-align: center;
+    font-size: 1.5em;
+    border-style: dotted;
+}

@@ -1,3 +1,8 @@
+.menu-header,
+.menu-body {
+    margin: 0 1em;
+}
+
 .menu-header {
     background: lightblue;
 }

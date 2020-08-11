@@ -5,6 +5,8 @@ import { getDays } from '../../Redux/actions/menu';
 
 import Day from './day';
 
+import './days.css';
+
 class Days extends Component {
 
     componentDidMount() {
@@ -13,9 +15,13 @@ class Days extends Component {
 
     render() {
         if (this.props.daysStatus === 'daysLoaded') {
-            return this.props.days.map(dayData => {
-                return (<Day key={dayData._id} dayData={dayData} />);
-            });
+            return (
+                <div className="days-container">
+                        {this.props.days.map(dayData => {
+                            return (<Day key={dayData._id} dayData={dayData} />);
+                        })}
+                </div>
+            );
         } else {
             return (<h4>Data Loading</h4>);
         }
