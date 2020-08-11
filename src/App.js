@@ -10,6 +10,7 @@ import './App.css';
 
 import AuthPage from './Pages/Auth';
 import MenuPage from './Pages/Menu';
+import GroceryPage from './Pages/Grocery';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             {!this.props.token && <Route path="/auth" component={AuthPage} />}
             {!this.props.token && <Redirect to="/auth" exact />}
             {<Route path="/menu" component={MenuPage} />}
+            {<Route path="/grocery" component={GroceryPage} />}
           </Switch>
         </React.Fragment>
       </BrowserRouter>

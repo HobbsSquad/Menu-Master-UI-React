@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Recipes from './recipes';
 
+import './mealSlot.css';
+
 class MealSlot extends Component {
 
     render() {
