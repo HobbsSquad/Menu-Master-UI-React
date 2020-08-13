@@ -16,7 +16,7 @@ class Navbar extends Component {
         return (
             <header className="navbar-container">
                 <div className="navbar-logo">
-                    <h1>Menu Master</h1>
+                    <h1>Grocery Getter</h1>
                 </div>
                 <div className="navbar-items">
                     <ul>
