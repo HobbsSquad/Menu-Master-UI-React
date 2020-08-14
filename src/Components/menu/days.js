@@ -18,12 +18,12 @@ class Days extends Component {
             return (
                 <div className="days-container">
                         {this.props.days.map(dayData => {
-                            return (<Day key={dayData._id} dayData={dayData} />);
+                            return <Day key={dayData._id} dayData={dayData} />;
                         })}
                 </div>
             );
         } else {
-            return (<h4>Data Loading</h4>);
+            return <h4>Data Loading</h4>;
         }
     }
 

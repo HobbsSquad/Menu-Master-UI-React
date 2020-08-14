@@ -7,7 +7,7 @@ import  { Button } from 'primereact/button';
 
 import { login } from '../Redux/actions/auth'
 import './Auth.css'
-import logo from '../Assets/logo.png'
+import logo from '../Assets/Menu Master-logo.png'
 
 class AuthPage extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class AuthPage extends Component {
   }
 
   render() {
-    const footer = <span style={{textAlign: 'center'}}><h4><i>The Job Sniper</i></h4></span>
+    const footer = <span style={{textAlign: 'center'}}><h4><i>Grocery Getter</i></h4></span>
 
     return (
       <>

@@ -1,0 +1,8 @@
+.grocery-header,
+.grocery-body {
+    margin: 0 1em;
+}
+
+.grocery-header {
+    background: lightblue;
+}
