@@ -22,6 +22,7 @@ class Navbar extends Component {
                     <ul>
                         <li><NavLink to="/menu">Menu</NavLink></li>
                         <li><NavLink to="/grocery">Grocery Items</NavLink></li>
+                        <li><NavLink to="/recipe">Recipes</NavLink></li>
                         <li><NavLink to="/auth" onClick={this.logoutHandler}>Logout</NavLink></li>
                     </ul>
                 </div>

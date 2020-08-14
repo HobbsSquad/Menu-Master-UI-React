@@ -1,0 +1,12 @@
+.recipe-button {
+    width: 100%;
+    text-align: left;
+}
+
+.recipe-button-name {
+    font-size: 1.5em;
+}
+
+.recipe-button-description {
+    font-size: 1.25em;
+}

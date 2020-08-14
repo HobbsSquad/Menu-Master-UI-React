@@ -1,0 +1,8 @@
+.recipe-header,
+.recipe-body {
+    margin: 0 1em;
+}
+
+.recipe-header {
+    background: lightblue;
+}
