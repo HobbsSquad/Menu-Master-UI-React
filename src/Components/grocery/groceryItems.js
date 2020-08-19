@@ -22,17 +22,22 @@ class GroceryItems extends Component {
 
     render() {
         if (this.props.ingredientsStatus === 'ingredientsLoaded') {
+            let groceryList = this.props.ingredients.filter(ingredient => {
+                return (this.state.filter !== '') ? (ingredient.name.toUpperCase().includes(this.state.filter) || (ingredient.description && ingredient.description.toUpperCase().includes(this.state.filter))) : true;
+            }).map(ingredient => {
+                return <GroceryItem key={ingredient._id} ingredientData={ingredient} selectIngredient={this.props.selectIngredient} />;
+            });
+            if (!groceryList.length) {
+                groceryList = <div className="grocery-items-list-empty">No results</div>;
+            }
+
             return (
                 <div className="grocery-items-container">
                     <div className="grocery-items-filter">
-                        <GroceryFilter filter={this.state.filter} updateFilter={(e) => this.setState({filter: e.target.value.toUpperCase()})}/>
+                        <GroceryFilter filter={this.state.filter} updateFilter={(e) => this.setState({ filter: e.target.value.toUpperCase() })} />
                     </div>
                     <div className="grocery-items-list">
-                        {this.props.ingredients.filter(ingredient => {
-                            return (this.state.filter !== '') ? (ingredient.name.toUpperCase().includes(this.state.filter) || (ingredient.description && ingredient.description.toUpperCase().includes(this.state.filter))) : true;
-                        }).map(ingredient => {
-                            return <GroceryItem key={ingredient._id} ingredientData={ingredient} selectIngredient={this.props.selectIngredient} />;
-                        })}
+                        {groceryList}
                     </div>
                 </div>
             );

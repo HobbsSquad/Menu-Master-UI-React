@@ -22,17 +22,21 @@ class Recipes extends Component {
 
     render() {
         if (this.props.recipesStatus === 'recipesLoaded') {
+            let recipeList = this.props.recipes.filter(recipe => {
+                return (this.state.filter !== '') ? (recipe.name.toUpperCase().includes(this.state.filter) || (recipe.description && recipe.description.toUpperCase().includes(this.state.filter))) : true;
+            }).map(recipe => {
+                return <Recipe key={recipe._id} recipeData={recipe} />;
+            });
+            if (!recipeList.length) {
+                recipeList = <div className="recipes-list-empty">No results</div>
+            }
             return (
                 <div className="recipes-container">
                     <div className="recipes-filter">
                         <RecipeFilter filter={this.state.filter} updateFilter={(e) => this.setState({ filter: e.target.value.toUpperCase() })} />
                     </div>
                     <div className="recipes-list">
-                        {this.props.recipes.filter(recipe => {
-                            return (this.state.filter !== '') ? (recipe.name.toUpperCase().includes(this.state.filter) || (recipe.description && recipe.description.toUpperCase().includes(this.state.filter))) : true;
-                        }).map(recipe => {
-                            return <Recipe key={recipe._id} recipeData={recipe} />;
-                        })}
+                        {recipeList}
                     </div>
                 </div>
             );

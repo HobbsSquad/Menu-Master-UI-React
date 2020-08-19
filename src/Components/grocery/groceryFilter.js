@@ -8,10 +8,10 @@ class GroceryFilter extends Component {
         return (
             <div className="grocery-filter-container">
                 <div className="grocery-filter-title">
-                    <label for="grocery-filter">Search for grocery item:</label>
+                    <label>Search for grocery item:</label>
                 </div>
                 <div className="grocery-filter-search">
-                    <input type="search" id="grocery-filter" onChange={this.props.updateFilter} />
+                    <input type="search" onChange={this.props.updateFilter} />
                 </div>
             </div>
         );

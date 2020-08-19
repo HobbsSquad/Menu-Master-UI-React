@@ -8,10 +8,10 @@ class RecipeFilter extends Component {
         return (
             <div className="recipe-filter-container">
                 <div className="recipe-filter-title">
-                    <label for="recipe-filter">Search for recipe:</label>
+                    <label>Search for recipe:</label>
                 </div>
                 <div className="recipe-filter-search">
-                    <input type="search" id="recipe-filter" onChange={this.props.updateFilter} />
+                    <input type="search" onChange={this.props.updateFilter} />
                 </div>
             </div>
         );
