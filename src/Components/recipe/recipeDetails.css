@@ -1,4 +1,5 @@
-.recipe-details-container {
+.recipe-details-container,
+.recipe-details-empty {
     width: 50%;
     float: right;
 }

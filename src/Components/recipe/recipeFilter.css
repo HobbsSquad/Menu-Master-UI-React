@@ -1,0 +1,13 @@
+.recipe-filter-container {
+    display: flex;
+    margin: 1em 0;
+}
+
+.recipe-filter-title {
+    margin-right: 1em;
+    font-size: 1.25em;
+}
+
+.recipe-filter-search input {
+    height: 100%;
+}

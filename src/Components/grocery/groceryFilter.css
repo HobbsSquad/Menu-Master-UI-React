@@ -1,0 +1,13 @@
+.grocery-filter-container {
+    display: flex;
+    margin: 1em 0;
+}
+
+.grocery-filter-title {
+    margin-right: 1em;
+    font-size: 1.25em;
+}
+
+.grocery-filter-search input {
+    height: 100%;
+}
