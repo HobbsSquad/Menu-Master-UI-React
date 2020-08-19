@@ -4,10 +4,17 @@ import { connect } from 'react-redux';
 import { getRecipes } from '../../Redux/actions/recipe';
 
 import Recipe from './recipe';
+import RecipeFilter from './recipeFilter';
 
 import './recipes.css';
 
 class Recipes extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            filter: ''
+        }
+    }
 
     componentDidMount() {
         this.props.getRecipes();
@@ -17,9 +24,16 @@ class Recipes extends Component {
         if (this.props.recipesStatus === 'recipesLoaded') {
             return (
                 <div className="recipes-container">
-                        {this.props.recipes.map(recipeData => {
-                            return <Recipe key={recipeData._id} recipeData={recipeData} />;
+                    <div className="recipes-filter">
+                        <RecipeFilter filter={this.state.filter} updateFilter={(e) => this.setState({ filter: e.target.value.toUpperCase() })} />
+                    </div>
+                    <div className="recipes-list">
+                        {this.props.recipes.filter(recipe => {
+                            return (this.state.filter !== '') ? (recipe.name.toUpperCase().includes(this.state.filter) || (recipe.description && recipe.description.toUpperCase().includes(this.state.filter))) : true;
+                        }).map(recipe => {
+                            return <Recipe key={recipe._id} recipeData={recipe} />;
                         })}
+                    </div>
                 </div>
             );
         } else {
