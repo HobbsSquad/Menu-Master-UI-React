@@ -15,4 +15,14 @@ export default class GroceryAPI {
     const ingredients = await axios.get(apiRoot + '/ingredient', options);
     return ingredients.data;
   }
+
+  async newIngredient(token, newGroceryItem) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const groceryItem = await axios.post(apiRoot + '/ingredient', newGroceryItem, options);
+    return groceryItem.data;
+  }
 }
