@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Navbar from '../Components/navbar';
 import GroceryItems from '../Components/grocery/groceryItems';
 import IngredientDetails from '../Components/grocery/ingredientDetails';
+import NewGroceryItemDialog from '../Components/grocery/newGroceryItemDialog';
 
 import './Grocery.css';
 
@@ -11,12 +12,9 @@ class GroceryPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedIngredient: null
+            selectedIngredient: null,
+            showNewGroceryItemDialog: false
         }
-    }
-
-    selectIngredient = (ingredient) => {
-        this.setState({selectedIngredient: ingredient});
     }
 
     render() {
@@ -27,7 +25,9 @@ class GroceryPage extends Component {
                     <h1>Grocery Items</h1>
                 </div>
                 <div className="grocery-body">
-                    <GroceryItems selectIngredient={this.selectIngredient} />
+                    <button className="grocery-new-button" onClick={() => this.setState({ showNewGroceryItemDialog: true })}>Create New Grocery Item</button>
+                    {this.state.showNewGroceryItemDialog && <NewGroceryItemDialog cancel={() => this.setState({ showNewGroceryItemDialog: false })}/>}
+                    <GroceryItems selectIngredient={(ingredient) => this.setState({selectedIngredient: ingredient})} />
                     <IngredientDetails selectedIngredient={this.state.selectedIngredient} />
                 </div>
             </div>

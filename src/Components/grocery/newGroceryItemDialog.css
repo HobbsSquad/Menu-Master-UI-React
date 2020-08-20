@@ -1,0 +1,28 @@
+.new-gorcery-item-dialog-container {
+    position: fixed;
+    left: 50%;
+    width: 25%;
+}
+
+.new-grocery-item-dialog-body [type=text] {
+    margin-bottom: 2em;
+    height: 2em;
+    width: 90%
+}
+
+.new-grocery-item-dialog-header {
+    margin-bottom: 2em;
+    background: lightskyblue;
+}
+
+.new-grocery-item-dialog-body [type=button] {
+    padding: 3px;
+    font-size: 1.5em;
+}
+
+.new-grocery-item-dialog-body [value=Cancel] {
+    float: left;
+}
+.new-grocery-item-dialog-body [value=Submit] {
+    float: right;
+}
