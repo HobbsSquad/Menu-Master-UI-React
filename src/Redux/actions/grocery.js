@@ -2,7 +2,11 @@ import {
     REQUEST_INGREDIENTS,
     INGREDIENTS_SUCCESS,
     SEND_NEW_INGREDIENT,
-    NEW_INGREDIENT_SUCCESS
+    NEW_INGREDIENT_SUCCESS,
+    REQUEST_INGREDIENT_UPDATE,
+    INGREDIENT_UPDATE_SUCCESS,
+    REQUEST_INGREDIENT,
+    INGREDIENT_SUCCESS
 } from '../actionTypes/grocery';
 import GroceryApi from '../../API/grocery';
 
@@ -26,6 +30,34 @@ export const getIngredients = () => async (dispatch, getState) => {
     dispatch(requestIngredients())
     const ingredientsData = await api.ingredients(state.auth.token);
     dispatch(ingredientsSuccess(ingredientsData))
+}
+
+/*
+export const ingredientsFail = () => {
+return {
+  type: INGREDIENTS_FAIL
+}
+}
+*/
+
+export const requestIngredient = () => {
+    return {
+        type: REQUEST_INGREDIENT
+    }
+}
+
+export const ingredientSuccess = (ingredient) => {
+    return {
+        type: INGREDIENT_SUCCESS,
+        ingredient
+    }
+}
+
+export const getIngredient = (ingredientId) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(requestIngredient())
+    const ingredientData = await api.ingredient(state.auth.token, ingredientId);
+    dispatch(ingredientSuccess(ingredientData))
 }
 
 /*
@@ -62,6 +94,38 @@ export const newIngredient = (newGroceryItem) => async (dispatch, getState) => {
 export const newIngredientFail = () => {
 return {
   type: NEW_INGREDIENT_FAIL
+}
+}
+*/
+
+export const requestIngredientUpdate = () => {
+    return {
+        type: REQUEST_INGREDIENT_UPDATE
+    }
+}
+
+export const ingredientUpdateSuccess = (ingredients, ingredient) => {
+    return {
+        type: INGREDIENT_UPDATE_SUCCESS,
+        ingredients,
+        ingredient
+    }
+}
+
+export const updateIngredient = (newGroceryItem) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(requestIngredientUpdate());
+    const newItem = await api.updateIngredient(state.auth.token, newGroceryItem);
+    const newList = state.grocery.ingredients.map(item => {
+        return (item._id === newItem._id) ? newItem : item;
+    });
+    dispatch(ingredientUpdateSuccess(newList, newItem));
+}
+
+/*
+export const ingredientUpdateFail = () => {
+return {
+  type: INGREDIENT_UPDATE_FAIL
 }
 }
 */

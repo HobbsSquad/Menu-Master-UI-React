@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getIngredient } from '../../Redux/actions/grocery';
 
 import './groceryItem.css';
 
 class GroceryItem extends Component {
 
     displayDetails = () => {
-        this.props.selectIngredient(this.props.ingredientData);
+        this.props.getIngredient(this.props.ingredientData._id);
     }
 
     render() {
@@ -23,4 +26,8 @@ class GroceryItem extends Component {
     }
 }
 
-export default GroceryItem;
+const mapDispatchToProps = {
+    getIngredient
+}
+
+export default connect(null, mapDispatchToProps)(GroceryItem)
