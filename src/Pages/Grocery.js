@@ -26,9 +26,9 @@ class GroceryPage extends Component {
                 </div>
                 <div className="grocery-body">
                     <button className="grocery-new-button" onClick={() => this.setState({ showNewGroceryItemDialog: true })}>Create New Grocery Item</button>
-                    {this.state.showNewGroceryItemDialog && <NewGroceryItemDialog cancel={() => this.setState({ showNewGroceryItemDialog: false })}/>}
-                    <GroceryItems selectIngredient={(ingredient) => this.setState({selectedIngredient: ingredient})} />
-                    <IngredientDetails selectedIngredient={this.state.selectedIngredient} />
+                    <NewGroceryItemDialog cancel={() => this.setState({ showNewGroceryItemDialog: false })} visible={this.state.showNewGroceryItemDialog}/>
+                    <GroceryItems />
+                    <IngredientDetails />
                 </div>
             </div>
         );

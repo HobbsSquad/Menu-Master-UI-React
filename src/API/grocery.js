@@ -16,6 +16,16 @@ export default class GroceryAPI {
     return ingredients.data;
   }
 
+  async ingredient(token, ingredientId) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const ingredient = await axios.get(apiRoot + '/ingredient/' + ingredientId, options);
+    return ingredient.data;
+  }
+
   async newIngredient(token, newGroceryItem) {
     const options = {
       headers: {
@@ -23,6 +33,16 @@ export default class GroceryAPI {
       }
     }
     const groceryItem = await axios.post(apiRoot + '/ingredient', newGroceryItem, options);
+    return groceryItem.data;
+  }
+
+  async updateIngredient(token, newGroceryItem) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const groceryItem = await axios.put(apiRoot + '/ingredient/' + newGroceryItem._id, newGroceryItem, options);
     return groceryItem.data;
   }
 }
