@@ -10,7 +10,10 @@ import {
   INGREDIENT_UPDATE_FAIL,
   REQUEST_INGREDIENT,
   INGREDIENT_SUCCESS,
-  INGREDIENT_FAIL
+  INGREDIENT_FAIL,
+  REQUEST_DELETE_INGREDIENT,
+  DELETE_INGREDIENT_SUCCESS,
+  DELETE_INGREDIENT_FAIL
 } from "../actionTypes/grocery";
 
 const initialState = {
@@ -18,7 +21,8 @@ const initialState = {
   ingredients: null,
   ingredientStatus: '',
   ingredient: null,
-  newIngredientStatus: ''
+  newIngredientStatus: '',
+  deleteIngredientStatus: ''
 };
 
 const grocery = (state = initialState, action) => {
@@ -99,6 +103,26 @@ const grocery = (state = initialState, action) => {
       return {
         ...state,
         newIngredientStatus: 'ingredientUpdateFail'
+      }
+    }
+    case REQUEST_DELETE_INGREDIENT: {
+      return {
+        ...state,
+        deleteIngredientStatus: 'requestingDeleteIngredient'
+      }
+    }
+    case DELETE_INGREDIENT_SUCCESS: {
+      return {
+        ...state,
+        deleteIngredientStatus: 'deleteIngredientSuccess',
+        ingredients: action.ingredients,
+        ingredient: null
+      }
+    }
+    case DELETE_INGREDIENT_FAIL: {
+      return{
+        ...state,
+        deleteIngredientStatus: 'deleteIngredientFail'
       }
     }
     default:

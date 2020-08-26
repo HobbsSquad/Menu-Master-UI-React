@@ -45,4 +45,14 @@ export default class GroceryAPI {
     const groceryItem = await axios.put(apiRoot + '/ingredient/' + newGroceryItem._id, newGroceryItem, options);
     return groceryItem.data;
   }
+
+  async deleteIngredient(token, ingredientId) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const ingredient = await axios.delete(apiRoot + '/ingredient/' + ingredientId, options);
+    return ingredient.data;
+  }
 }

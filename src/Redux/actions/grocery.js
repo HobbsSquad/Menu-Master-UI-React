@@ -6,7 +6,9 @@ import {
     REQUEST_INGREDIENT_UPDATE,
     INGREDIENT_UPDATE_SUCCESS,
     REQUEST_INGREDIENT,
-    INGREDIENT_SUCCESS
+    INGREDIENT_SUCCESS,
+    REQUEST_DELETE_INGREDIENT,
+    DELETE_INGREDIENT_SUCCESS
 } from '../actionTypes/grocery';
 import GroceryApi from '../../API/grocery';
 
@@ -126,6 +128,37 @@ export const updateIngredient = (newGroceryItem) => async (dispatch, getState) =
 export const ingredientUpdateFail = () => {
 return {
   type: INGREDIENT_UPDATE_FAIL
+}
+}
+*/
+
+export const requestDeleteIngredient = () => {
+    return {
+        type: REQUEST_DELETE_INGREDIENT
+    }
+}
+
+export const deleteIngredientSuccess = (ingredients) => {
+    return {
+        type: DELETE_INGREDIENT_SUCCESS,
+        ingredients
+    }
+}
+
+export const deleteIngredient = (groceryItemId) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(requestDeleteIngredient());
+    await api.deleteIngredient(state.auth.token, groceryItemId);
+    const newList = state.grocery.ingredients.filter(item => {
+        return (item._id !== groceryItemId);
+    });
+    dispatch(ingredientUpdateSuccess(newList));
+}
+
+/*
+export const deleteIngredientFail = () => {
+return {
+  type: DELETE_INGREDIENT_FAIL
 }
 }
 */
