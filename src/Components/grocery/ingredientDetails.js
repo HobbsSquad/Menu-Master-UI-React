@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import UpdateGroceryItemDialog from './updateGroceryItemDialog';
+import DeleteGroceryItemDialog from './deleteGroceryItemDialog';
 
 import './ingredientDetails.css';
 
@@ -9,7 +10,8 @@ class IngredientDetails extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showUpdateGroceryItemDialog: false
+            showUpdateGroceryItemDialog: false,
+            showDeleteGroceryItemDialog: false
         }
     }
 
@@ -26,6 +28,8 @@ class IngredientDetails extends Component {
                         <a href={this.props.ingredient.productLink} target="_blank" rel="noopener noreferrer"><img alt="ingredientImage" src={this.props.ingredient.imageLink}/></a>
                         <button className="grocery-update-button" onClick={() => this.setState({ showUpdateGroceryItemDialog: true })}>Update Grocery Item</button>
                         <UpdateGroceryItemDialog cancel={() => this.setState({ showUpdateGroceryItemDialog: false })} visible={this.state.showUpdateGroceryItemDialog} />
+                        <button className="grocery-delete-button" onClick={() => this.setState({ showDeleteGroceryItemDialog: true })}>Delete Grocery Item</button>
+                        <DeleteGroceryItemDialog cancel={() => this.setState({ showDeleteGroceryItemDialog: false })} visible={this.state.showDeleteGroceryItemDialog} />
                     </div>
                 </div>
             );
