@@ -1,0 +1,26 @@
+.draggable-lists-container {
+    display: flex;
+    height: 100%;
+}
+
+.draggable-lists-source {
+    width: 50%;
+    margin: 0 1em;
+}
+
+.draggable-lists-target {
+    width: 50%;
+    margin: 0 1em;
+}
+
+.draggable-lists-source-body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.draggable-lists-target-body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 500px;
+}
