@@ -12,7 +12,6 @@ class GroceryPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedIngredient: null,
             showNewGroceryItemDialog: false
         }
     }

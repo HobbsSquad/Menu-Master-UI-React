@@ -4,14 +4,18 @@ import {
   RECIPES_FAIL,
   REQUEST_CURRENT_RECIPE,
   CURRENT_RECIPE_SUCCESS,
-  CURRENT_RECIPE_FAIL
+  CURRENT_RECIPE_FAIL,
+  SEND_NEW_RECIPE,
+  NEW_RECIPE_SUCCESS,
+  NEW_RECIPE_FAIL
 } from "../actionTypes/recipe";
 
 const initialState = {
   recipesStatus: '',
   recipes: null,
   currentRecipeStatus: '',
-  currentRecipe: null
+  currentRecipe: null,
+  newRecipeStatus: ''
 };
 
 const recipe = (state = initialState, action) => {
@@ -54,6 +58,25 @@ const recipe = (state = initialState, action) => {
         ...state,
         currentRecipeStatus: 'currentRecipeFailed',
         currentRecipe: null
+      }
+    }
+    case SEND_NEW_RECIPE: {
+      return {
+        ...state,
+        newRecipeStatus: 'requestingNewRecipe'
+      }
+    }
+    case NEW_RECIPE_SUCCESS: {
+      return {
+        ...state,
+        newRecipeStatus: 'newRecipeSuccess',
+        recipes: action.recipes
+      }
+    }
+    case NEW_RECIPE_FAIL: {
+      return {
+        ...state,
+        newRecipeStatus: 'newRecipeFail'
       }
     }
     default:

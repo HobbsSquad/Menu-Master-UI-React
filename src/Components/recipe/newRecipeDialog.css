@@ -1,0 +1,15 @@
+.new-recipe-item-dialog-body {
+    height: 50%;
+}
+
+.new-recipe-item-dialog-top [type="text"] {
+    width: 100%;
+}
+
+.new-recipe-item-dialog-lists {
+    height: 100%;
+}
+
+.new-recipe-item-dialog-body [type="button"] {
+    padding: 0.25em 0.25em;
+}

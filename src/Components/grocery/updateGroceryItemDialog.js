@@ -35,7 +35,7 @@ class UpdateGroceryItemDialog extends Component {
 
     render() {
         return (
-            <div open className="update-gorcery-item-dialog-container">
+            <div open className="update-grocery-item-dialog-container">
                 <Dialog header="Update Grocery Item" visible={this.props.visible} onHide={() => this.props.cancel()} onShow={() => this.resetState()}>
                     <div className="update-grocery-item-dialog-body">
                         <label>Name</label><br />

@@ -1,7 +1,12 @@
-import { REQUEST_RECIPES,
-         RECIPES_SUCCESS,
-         REQUEST_CURRENT_RECIPE,
-         CURRENT_RECIPE_SUCCESS } from '../actionTypes/recipe';
+import {
+    REQUEST_RECIPES,
+    RECIPES_SUCCESS,
+    REQUEST_CURRENT_RECIPE,
+    CURRENT_RECIPE_SUCCESS,
+    SEND_NEW_RECIPE,
+    NEW_RECIPE_SUCCESS
+} from '../actionTypes/recipe';
+
 import RecipeAPI from '../../API/recipe';
 
 const api = new RecipeAPI();
@@ -58,6 +63,36 @@ export const getCurrentRecipe = (recipeId) => async (dispatch, getState) => {
 export const recipeFail = () => {
 return {
   type: RECIPE_FAIL
+}
+}
+*/
+
+export const sendNewRecipe = () => {
+    return {
+        type: SEND_NEW_RECIPE
+    }
+}
+
+export const newRecipeSuccess = (recipes) => {
+    return {
+        type: NEW_RECIPE_SUCCESS,
+        recipes
+    }
+}
+
+export const newRecipe = (newRecipeItem) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(sendNewRecipe());
+    const newItem = await api.newRecipe(state.auth.token, newRecipeItem);
+    const newList = state.recipe.recipes;
+    newList.push(newItem);
+    dispatch(newRecipeSuccess(newList));
+}
+
+/*
+export const newRecipeFail = () => {
+return {
+  type: NEW_RECIPE_FAIL
 }
 }
 */
