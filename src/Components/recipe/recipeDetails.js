@@ -17,6 +17,7 @@ class RecipeDetails extends Component {
                     </div>
                     <div className="recipe-details-body">
                         <Ingredients />
+                        <button className="recipe-update-button" onClick={this.props.openEditDialog}>Edit Recipe</button>
                     </div>
                 </div>
             );

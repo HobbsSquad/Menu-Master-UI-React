@@ -13,7 +13,7 @@ class DraggableLists extends Component {
             sourceList: this.props.sourceList,
             targetList: this.props.targetList,
             draggedItem: null,
-            ingredientList: [],
+            ingredientList: this.props.targetList,
             sourceFilter: ''
         }
     }

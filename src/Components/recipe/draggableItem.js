@@ -9,7 +9,7 @@ class DraggableItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            quantity: '',
+            quantity: this.props.itemData.quantity ? this.props.itemData.quantity : '',
             active: false
         }
     }
