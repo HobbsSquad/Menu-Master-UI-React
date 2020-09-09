@@ -7,7 +7,10 @@ import {
   CURRENT_RECIPE_FAIL,
   SEND_NEW_RECIPE,
   NEW_RECIPE_SUCCESS,
-  NEW_RECIPE_FAIL
+  NEW_RECIPE_FAIL,
+  REQUEST_RECIPE_UPDATE,
+  UPDATE_RECIPE_SUCCESS,
+  UPDATE_RECIPE_FAIL
 } from "../actionTypes/recipe";
 
 const initialState = {
@@ -15,7 +18,8 @@ const initialState = {
   recipes: null,
   currentRecipeStatus: '',
   currentRecipe: null,
-  newRecipeStatus: ''
+  newRecipeStatus: '',
+  updateRecipeStatus: ''
 };
 
 const recipe = (state = initialState, action) => {
@@ -77,6 +81,26 @@ const recipe = (state = initialState, action) => {
       return {
         ...state,
         newRecipeStatus: 'newRecipeFail'
+      }
+    }
+    case REQUEST_RECIPE_UPDATE: {
+      return {
+        ...state,
+        updateRecipeStatus: 'requestingRecipeUpdate'
+      }
+    }
+    case UPDATE_RECIPE_SUCCESS: {
+      return {
+        ...state,
+        updateRecipeStatus: 'updateRecipeSuccess',
+        recipes: action.recipes,
+        currentRecipe: action.currentRecipe
+      }
+    }
+    case UPDATE_RECIPE_FAIL: {
+      return {
+        ...state,
+        updateRecipeStatus: 'updateRecipeFail'
       }
     }
     default:

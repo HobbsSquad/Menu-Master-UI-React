@@ -4,6 +4,7 @@ import Recipes from '../Components/recipe/recipes';
 import RecipeDetails from '../Components/recipe/recipeDetails';
 import Navbar from '../Components/navbar';
 import NewRecipeDialog from '../Components/recipe/newRecipeDialog';
+import UpdateRecipeDialog from '../Components/recipe/updateRecipeDialog';
 
 import './Recipe.css';
 
@@ -12,7 +13,8 @@ class RecipePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showNewRecipeDialog: false
+            showNewRecipeDialog: false,
+            showUpdateRecipeDialog: false
         }
     }
 
@@ -26,8 +28,9 @@ class RecipePage extends Component {
                 <div className="recipe-body">
                     <button className="recipe-new-button" onClick={() => this.setState({ showNewRecipeDialog: true })}>Create New Recipe</button>
                     <NewRecipeDialog cancel={() => this.setState({ showNewRecipeDialog: false })} visible={this.state.showNewRecipeDialog}/>
+                    <UpdateRecipeDialog cancel={() => this.setState({ showUpdateRecipeDialog: false })} visible={this.state.showUpdateRecipeDialog} />
                     <Recipes />
-                    <RecipeDetails />
+                    <RecipeDetails openEditDialog={() => this.setState({showUpdateRecipeDialog: true})} />
                 </div>
             </div>
         );

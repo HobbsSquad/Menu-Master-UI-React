@@ -35,4 +35,14 @@ export default class RecipeAPI {
     const recipeItem = await axios.post(apiRoot + '/recipe', newRecipeItem, options);
     return recipeItem.data;
   }
+
+  async updateRecipe(token, newRecipeItem) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const recipeItem = await axios.put(apiRoot + '/recipe/' + newRecipeItem._id, newRecipeItem, options);
+    return recipeItem.data;
+  }
 }
