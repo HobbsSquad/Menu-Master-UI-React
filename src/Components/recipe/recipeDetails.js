@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { deleteRecipe } from '../../Redux/actions/recipe';
 import Ingredients from './ingredients';
+import DeleteRecipeDialog from './deleteRecipeDialog';
 
 import './recipeDetails.css';
 
 class RecipeDetails extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            showDeleteRecipeDialog: false
+        }
+    }
+
+    deleteButtonHandler = () => {
+        this.props.deleteRecipe()
+    }
 
     render() {
         if (this.props.currentRecipe) {
@@ -17,7 +30,11 @@ class RecipeDetails extends Component {
                     </div>
                     <div className="recipe-details-body">
                         <Ingredients />
-                        <button className="recipe-update-button" onClick={this.props.openEditDialog}>Edit Recipe</button>
+                        <div className="recipe-edit-buttons">
+                            <button className="recipe-update-button" onClick={this.props.openEditDialog}>Edit Recipe</button>
+                            <button className="recipe-delete-button" onClick={() => this.setState({ showDeleteRecipeDialog: true })}>Delete Recipe</button>
+                        </div>
+                        <DeleteRecipeDialog cancel={() => this.setState({ showDeleteRecipeDialog: false })} visible={this.state.showDeleteRecipeDialog} />
                     </div>
                 </div>
             );
@@ -31,8 +48,12 @@ class RecipeDetails extends Component {
     }
 }
 
+const mapDispatchToProps = {
+    deleteRecipe
+}
+
 const mapStateToProps = state => ({
     currentRecipe: state.recipe.currentRecipe
 })
 
-export default connect(mapStateToProps, null)(RecipeDetails)
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails)
