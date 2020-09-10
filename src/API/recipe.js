@@ -45,4 +45,14 @@ export default class RecipeAPI {
     const recipeItem = await axios.put(apiRoot + '/recipe/' + newRecipeItem._id, newRecipeItem, options);
     return recipeItem.data;
   }
+
+  async deleteRecipe(token, recipeId) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const recipeItem = await axios.delete(apiRoot + '/recipe/' + recipeId, options);
+    return recipeItem.data;
+  }
 }

@@ -6,7 +6,9 @@ import {
     SEND_NEW_RECIPE,
     NEW_RECIPE_SUCCESS,
     REQUEST_RECIPE_UPDATE,
-    UPDATE_RECIPE_SUCCESS
+    UPDATE_RECIPE_SUCCESS,
+    REQUEST_DELETE_RECIPE,
+    DELETE_RECIPE_SUCCESS
 } from '../actionTypes/recipe';
 
 import RecipeAPI from '../../API/recipe';
@@ -127,6 +129,37 @@ export const updateRecipe = (newRecipeItem) => async (dispatch, getState) => {
 export const updateRecipeFail = () => {
 return {
   type: UPDATE_RECIPE_FAIL
+}
+}
+*/
+
+export const requestDeleteRecipe = () => {
+    return {
+        type: REQUEST_DELETE_RECIPE
+    }
+}
+
+export const deleteRecipeSuccess = (recipes) => {
+    return {
+        type: DELETE_RECIPE_SUCCESS,
+        recipes
+    }
+}
+
+export const deleteRecipe = (recipeId) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(requestDeleteRecipe());
+    await api.deleteRecipe(state.auth.token, recipeId);
+    const newList = state.recipe.recipes.filter(item => {
+        return item._id !== recipeId;
+    });
+    dispatch(deleteRecipeSuccess(newList));
+}
+
+/*
+export const deleteRecipeFail = () => {
+return {
+  type: DELETE_RECIPE_FAIL
 }
 }
 */

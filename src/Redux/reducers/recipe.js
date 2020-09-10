@@ -10,7 +10,10 @@ import {
   NEW_RECIPE_FAIL,
   REQUEST_RECIPE_UPDATE,
   UPDATE_RECIPE_SUCCESS,
-  UPDATE_RECIPE_FAIL
+  UPDATE_RECIPE_FAIL,
+  REQUEST_DELETE_RECIPE,
+  DELETE_RECIPE_SUCCESS,
+  DELETE_RECIPE_FAIL
 } from "../actionTypes/recipe";
 
 const initialState = {
@@ -101,6 +104,26 @@ const recipe = (state = initialState, action) => {
       return {
         ...state,
         updateRecipeStatus: 'updateRecipeFail'
+      }
+    }
+    case REQUEST_DELETE_RECIPE: {
+      return {
+        ...state,
+        deleteRecipeStatus: 'requestingDeleteRecipe'
+      }
+    }
+    case DELETE_RECIPE_SUCCESS: {
+      return {
+        ...state,
+        deleteRecipeStatus: 'deleteRecipeSuccess',
+        currentRecipe: null,
+        recipes: action.recipes
+      }
+    }
+    case DELETE_RECIPE_FAIL: {
+      return {
+        ...state,
+        deleteRecipeStatus: 'deleteRecipeFail'
       }
     }
     default:

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
 
-import { deleteIngredient } from '../../Redux/actions/grocery';
+import { deleteRecipe } from '../../Redux/actions/recipe';
 
-class DeleteGroceryItemDialog extends Component {
+class DeleteRecipeItemDialog extends Component {
 
     submitButtonHandler = () => {
-        this.props.deleteIngredient(this.props.ingredient._id);
+        this.props.deleteRecipe(this.props.currentRecipe._id);
         this.props.cancel();
     }
 
     render() {
         return (
-            <div open className="delete-gorcery-item-dialog-container">
+            <div open className="delete-recipe-dialog-container">
                 <Dialog header="Are you sure?" visible={this.props.visible} onHide={() => this.props.cancel()}>
-                    <div className="delete-grocery-item-dialog-body">
+                    <div className="delete-recipe-dialog-body">
                         <input type="button" onClick={this.submitButtonHandler} value="Delete" />
                     </div>
                 </Dialog>
@@ -25,11 +25,11 @@ class DeleteGroceryItemDialog extends Component {
 }
 
 const mapDispatchToProps = {
-    deleteIngredient
+    deleteRecipe
 }
 
 const mapStateToProps = state => ({
-    ingredient: state.grocery.ingredient
+    currentRecipe: state.recipe.currentRecipe
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteGroceryItemDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteRecipeItemDialog)
