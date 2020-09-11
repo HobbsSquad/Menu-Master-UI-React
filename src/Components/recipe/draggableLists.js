@@ -114,7 +114,7 @@ class DraggableLists extends Component {
                 break;
             }
         }
-        newSource.push(...this.state.sourceList.slice(0, index), newItem, ...this.state.sourceList.slice(index, this.state.sourceList.length));
+        newSource.push(...this.state.sourceList.slice(0, index), {...newItem, quantity: ''}, ...this.state.sourceList.slice(index, this.state.sourceList.length));
         this.setState({
             sourceList: newSource
         });
