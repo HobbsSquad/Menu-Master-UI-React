@@ -1,6 +1,7 @@
 .draggable-lists-container {
     display: flex;
-    height: 100%;
+    height: 600px;
+    width: 800px;
 }
 
 .draggable-lists-source {
@@ -13,7 +14,7 @@
     margin: 0 1em;
 }
 
-.draggable-lists-source-body {
+.draggable-lists-source-list {
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 500px;

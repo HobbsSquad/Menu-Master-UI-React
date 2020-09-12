@@ -21,9 +21,6 @@ class DraggableLists extends Component {
     targetDropHandler = (e) => {
         if (this.state.draggedItem) {
             e.preventDefault();
-            let newSource = this.state.sourceList;
-            const newTarget = this.state.targetList;
-            let newIngredientList = this.state.ingredientList;
             let itemExists = false;
             for (let i = 0; i < this.state.targetList.length; i++) {
                 if (this.state.targetList[i]._id === this.state.draggedItem._id) {
@@ -32,6 +29,9 @@ class DraggableLists extends Component {
                 }
             }
             if (!itemExists) {
+                let newSource = this.state.sourceList.map(item => item);
+                const newTarget = this.state.targetList.map(item => item);
+                let newIngredientList = this.state.ingredientList.map(item => item);
                 newTarget.push(this.state.draggedItem);
                 newIngredientList.push({
                     _id: this.state.draggedItem._id,
@@ -45,10 +45,13 @@ class DraggableLists extends Component {
                     return item._id !== this.state.draggedItem._id;
                 });
                 this.props.changeHandler("ingredients", newIngredientList);
+                this.setState({
+                    sourceList: newSource,
+                    targetList: newTarget,
+                    ingredientList: newIngredientList
+                });
             }
             this.setState({
-                sourceList: newSource,
-                targetList: newTarget,
                 draggedItem: null
             });
         }
@@ -57,9 +60,6 @@ class DraggableLists extends Component {
     sourceDropHandler = (e) => {
         if (this.state.draggedItem) {
             e.preventDefault();
-            const newSource = this.state.sourceList;
-            let newTarget = this.state.targetList;
-            let newIngredientList = this.state.ingredientList;
             let itemExists = false;
             for (let i = 0; i < this.state.sourceList.length; i++) {
                 if (this.state.sourceList[i]._id === this.state.draggedItem._id) {
@@ -68,7 +68,9 @@ class DraggableLists extends Component {
                 }
             }
             if (!itemExists) {
-                newSource.push(this.state.draggedItem);
+                let newTarget = this.state.targetList.map(item => item);
+                let newIngredientList = this.state.ingredientList.map(item => item);
+                this.insertItemToSource(this.state.draggedItem);
                 newTarget = newTarget.filter(item => {
                     return item._id !== this.state.draggedItem._id;
                 });
@@ -76,12 +78,13 @@ class DraggableLists extends Component {
                     return item._id !== this.state.draggedItem._id;
                 });
                 this.props.changeHandler("ingredients", newIngredientList);
+                this.setState({
+                    targetList: newTarget,
+                    ingredientList: newIngredientList
+                });
             }
             this.setState({
-                sourceList: newSource,
-                targetList: newTarget,
-                draggedItem: null,
-                ingredientList: newIngredientList
+                draggedItem: null
             });
         }
     }
@@ -100,7 +103,21 @@ class DraggableLists extends Component {
         this.setState({
             ingredientList: newIngredientList
         });
+    }
 
+    insertItemToSource = (newItem) => {
+        let newSource = [];
+        let index = this.state.sourceList.length;
+        for (let i = 0; i < this.state.sourceList.length; i++) {
+            if (newItem.name.localeCompare(this.state.sourceList[i].name) === -1) {
+                index = i;
+                break;
+            }
+        }
+        newSource.push(...this.state.sourceList.slice(0, index), {...newItem, quantity: ''}, ...this.state.sourceList.slice(index, this.state.sourceList.length));
+        this.setState({
+            sourceList: newSource
+        });
     }
 
     render() {
@@ -125,7 +142,7 @@ class DraggableLists extends Component {
                             <label>Search</label><br />
                             <input type="text" value={this.state.sourceFilter} onChange={(e) => this.setState({ sourceFilter: e.target.value })} />
                         </div>
-                        <div className="draggable-lsits-source-list">
+                        <div className="draggable-lists-source-list">
                             {this.state.sourceList.filter((ingredient) => {
                                 return (this.state.sourceFilter !== '') ? (ingredient.name.toUpperCase().includes(this.state.sourceFilter.toUpperCase()) || (ingredient.description && ingredient.description.toUpperCase().includes(this.state.sourceFilter.toUpperCase()))) : true;
                             }).map(item => {
