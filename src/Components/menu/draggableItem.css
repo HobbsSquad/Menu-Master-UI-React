@@ -1,0 +1,9 @@
+.draggable-item-container {
+    width: 100%;
+    margin: 0.25em 0;
+    border-style: dotted;
+}
+
+.draggable-item-name {
+    margin: 0.25em 0.25em;
+}

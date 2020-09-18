@@ -25,4 +25,24 @@ export default class MenuAPI {
     const day = await axios.get(apiRoot + '/day/' + dayId, options);
     return day.data;
   }
+
+  async newDay(token, newDay) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const day = await axios.post(apiRoot + '/day', newDay, options);
+    return day.data;
+  }
+
+  async getMeals(token) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const meals = await axios.get(apiRoot + '/meal', options);
+    return meals.data;
+  }
 }

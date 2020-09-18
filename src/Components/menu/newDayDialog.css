@@ -1,0 +1,15 @@
+.new-day-dialog-body {
+    height: 50%;
+}
+
+.new-day-dialog-top [type="text"] {
+    width: 100%;
+}
+
+.new-day-dialog-lists {
+    height: 100%;
+}
+
+.new-day-dialog-body [type="button"] {
+    padding: 0.25em 0.25em;
+}
