@@ -4,7 +4,8 @@ import { Dialog } from 'primereact/dialog';
 
 import { newRecipe } from '../../Redux/actions/recipe';
 import { getIngredients } from '../../Redux/actions/grocery';
-import DraggableLists from './draggableLists';
+import DraggableLists from '../draggableLists';
+import DraggableRecipe from './draggableRecipe';
 
 import './newRecipeDialog.css';
 
@@ -17,7 +18,9 @@ class NewRecipeDialog extends Component {
                 name: '',
                 description: '',
                 ingredients: []
-            }
+            },
+            nameError: false,
+            descriptionError: false
         }
     }
 
@@ -26,8 +29,13 @@ class NewRecipeDialog extends Component {
     }
 
     submitButtonHandler = () => {
-        this.props.newRecipe(this.state.newItem);
-        this.props.cancel();
+        const nameErr = this.state.newItem.name === "";
+        const descriptionErr = this.state.newItem.description === "";
+        this.setState({nameError: nameErr, descriptionError: descriptionErr});
+        if(!(nameErr || descriptionErr)) {
+            this.props.newRecipe(this.state.newItem);
+            this.props.cancel();
+        }
     }
 
     resetState = () => {
@@ -36,7 +44,9 @@ class NewRecipeDialog extends Component {
                 name: '',
                 description: '',
                 ingredients: []
-            }
+            },
+            nameError: false,
+            descriptionError: false
         });
     }
 
@@ -55,13 +65,29 @@ class NewRecipeDialog extends Component {
                 <Dialog header="New Grocery Item" visible={this.props.visible} onHide={() => this.props.cancel()} onShow={() => this.resetState()}>
                     <div className="new-recipe-item-dialog-body">
                         <div className="new-recipe-item-dialog-top">
-                            <label>Name</label><br />
+                            <div className="name-label-and-error">
+                                <label>Name</label>
+                                {this.state.nameError && <div className="name-error-message">This field is required</div>}
+                            </div>
                             <input type="text" name="itemName" value={this.state.newItem.name} onChange={(e) => this.updateAttribute("name", e.target.value)} /><br />
-                            <label>Description</label><br />
+                            <div className="description-label-and-error">
+                                <label>Description</label>
+                                {this.state.descriptionError && <div className="description-error-message">This field is required</div>}
+                            </div>
                             <input type="text" name="itemDescription" value={this.state.newItem.description} onChange={(e) => this.updateAttribute("description", e.target.value)} /><br />
                         </div>
                         <div className="new-recipe-item-dialog-lists">
-                            <DraggableLists sourceList={this.props.ingredients} targetList={[]} changeHandler={this.updateAttribute} />
+                            <DraggableLists
+                                sourceList={this.props.ingredients}
+                                targetList={[]}
+                                changeHandler={(returnedList) => this.updateAttribute("ingredients", returnedList)}
+                                filterSource={true}
+                                sourceLabel="Ingredients Available"
+                                targetLabel="Ingredients for Recipe"
+                                searchLabel="Search"
+                                sortSourceBy="name"
+                                draggableItem={DraggableRecipe}
+                            />
                         </div>
                         <input type="button" onClick={this.submitButtonHandler} value="Submit" />
                     </div>
@@ -79,6 +105,5 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
     ingredients: state.grocery.ingredients
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewRecipeDialog)

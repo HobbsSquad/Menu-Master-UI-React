@@ -1,9 +1,9 @@
-.draggable-item-container {
+.draggable-recipe-container {
     width: 100%;
     margin: 0.25em 0;
     border-style: dotted;
 }
 
-.draggable-item-name {
+.draggable-recipe-name {
     margin: 0.25em 0.25em;
 }
