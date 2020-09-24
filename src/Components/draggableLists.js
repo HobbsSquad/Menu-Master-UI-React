@@ -118,14 +118,14 @@ class DraggableLists extends Component {
                 return (this.state.sourceFilter !== '') ? (ingredient.name.toUpperCase().includes(this.state.sourceFilter.toUpperCase()) || (ingredient.description && ingredient.description.toUpperCase().includes(this.state.sourceFilter.toUpperCase()))) : true;
             })
         }
-        const CurrentDraggableItem = this.props.draggableItem || DraggableItem;
+        const CurrentDraggableItem = this.props.draggableItem ? this.props.draggableItem : DraggableItem;
         return list.map(item => {
             return <CurrentDraggableItem itemData={item} setDraggedItem={this.setDraggedItem} changeHandler={this.changeItem} inTarget={false} />
         })
     }
 
     render() {
-        const CurrentDraggableItem = this.props.draggableItem || DraggableItem;
+        const CurrentDraggableItem = this.props.draggableItem ? this.props.draggableItem : DraggableItem;
         return (
             <div className="draggable-lists-container">
                 <div className="draggable-lists-target" onDrop={this.targetDropHandler} onDragOver={(e) => e.preventDefault()}>
