@@ -4,7 +4,7 @@ import { Dialog } from 'primereact/dialog';
 
 import { getMeals } from '../../Redux/actions/menu';
 import { newDay } from '../../Redux/actions/menu';
-import DraggableLists from './draggableLists';
+import DraggableLists from '../draggableLists';
 
 import './newDayDialog.css';
 
@@ -57,7 +57,15 @@ class NewDayDialog extends Component {
                             <input type="date" value={this.state.newItem.date} onChange={(e) => this.updateAttribute("date", e.target.value)} /><br />
                         </div>
                         <div className="new-day-dialog-lists">
-                            <DraggableLists sourceList={this.props.meals} targetList={[]} changeHandler={this.updateAttribute} />
+                            <DraggableLists
+                                sourceList={this.props.meals}
+                                targetList={[]}
+                                changeHandler={(returnedList) => this.updateAttribute("mealSlots", returnedList)}
+                                filterSource={false}
+                                sourceLabel="Meals Available"
+                                targetLabel="Meals for the Day"
+                                sortSourceBy="order"
+                            />
                         </div>
                         <input type="button" onClick={this.submitButtonHandler} value="Submit" />
                     </div>

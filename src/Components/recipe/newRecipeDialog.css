@@ -13,3 +13,14 @@
 .new-recipe-item-dialog-body [type="button"] {
     padding: 0.25em 0.25em;
 }
+
+.name-label-and-error,
+.description-label-and-error {
+    display: flex;
+}
+
+.name-error-message,
+.description-error-message {
+    color: red;
+    margin: 0em 0.5em;
+}
