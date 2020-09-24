@@ -14,8 +14,7 @@ class DraggableLists extends Component {
             targetList: this.props.targetList,
             draggedItem: null,
             returnedList: this.props.targetList,
-            sourceFilter: '',
-            draggableItem: this.props.draggableItem || DraggableItem
+            sourceFilter: ''
         }
     }
 
@@ -119,12 +118,14 @@ class DraggableLists extends Component {
                 return (this.state.sourceFilter !== '') ? (ingredient.name.toUpperCase().includes(this.state.sourceFilter.toUpperCase()) || (ingredient.description && ingredient.description.toUpperCase().includes(this.state.sourceFilter.toUpperCase()))) : true;
             })
         }
+        const CurrentDraggableItem = this.props.draggableItem || DraggableItem;
         return list.map(item => {
-            return <this.state.draggableItem itemData={item} setDraggedItem={this.setDraggedItem} changeHandler={this.changeItem} inTarget={false} />
+            return <CurrentDraggableItem itemData={item} setDraggedItem={this.setDraggedItem} changeHandler={this.changeItem} inTarget={false} />
         })
     }
 
     render() {
+        const CurrentDraggableItem = this.props.draggableItem || DraggableItem;
         return (
             <div className="draggable-lists-container">
                 <div className="draggable-lists-target" onDrop={this.targetDropHandler} onDragOver={(e) => e.preventDefault()}>
@@ -133,7 +134,7 @@ class DraggableLists extends Component {
                     </div>
                     <div className="draggable-lists-target-body">
                         {this.state.targetList.map(item => {
-                            return <this.state.draggableItem itemData={item} setDraggedItem={this.setDraggedItem} changeHandler={this.changeItem} inTarget={true} />
+                            return <CurrentDraggableItem itemData={item} setDraggedItem={this.setDraggedItem} changeHandler={this.changeItem} inTarget={true} />
                         })}
                     </div>
                 </div>
