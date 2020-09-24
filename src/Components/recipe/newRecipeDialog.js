@@ -106,5 +106,4 @@ const mapStateToProps = state => ({
     ingredients: state.grocery.ingredients
 })
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(NewRecipeDialog)

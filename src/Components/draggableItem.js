@@ -11,7 +11,6 @@ class DraggableItem extends Component {
         }
     }
 
-
     startDragHandler = (e) => {
         this.props.setDraggedItem(this.props.itemData);
     }

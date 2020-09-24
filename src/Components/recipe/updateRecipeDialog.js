@@ -121,5 +121,4 @@ const mapStateToProps = state => ({
     currentRecipe: state.recipe.currentRecipe
 })
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateRecipeDialog)
