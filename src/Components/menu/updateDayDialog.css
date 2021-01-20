@@ -1,0 +1,15 @@
+.update-day-dialog-body {
+    height: 50%;
+}
+
+.update-day-dialog-top [type="text"] {
+    width: 100%;
+}
+
+.update-day-dialog-lists {
+    height: 100%;
+}
+
+.update-day-dialog-body [type="button"] {
+    padding: 0.25em 0.25em;
+}

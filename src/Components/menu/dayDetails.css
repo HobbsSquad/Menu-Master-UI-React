@@ -6,6 +6,7 @@
 .day-details-header {
     text-align: center;
     border-style: dotted;
+    display: flex;
 }
 
 .day-details-header-dotw {

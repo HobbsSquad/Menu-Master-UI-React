@@ -6,7 +6,9 @@ import {
     REQUEST_NEW_DAY,
     NEW_DAY_SUCCESS,
     REQUEST_MEALS,
-    MEALS_SUCCESS
+    MEALS_SUCCESS,
+    REQUEST_UPDATE_DAY,
+    UPDATE_DAY_SUCCESS
 } from '../actionTypes/menu';
 import MenuApi from '../../API/menu';
 
@@ -85,7 +87,7 @@ export const newDay = (newDay) => async (dispatch, getState) => {
     const state = getState();
     dispatch(requestNewDay());
     const dayData = await api.newDay(state.auth.token, newDay);
-    const newDays = state.menu.days;
+    const newDays = [...state.menu.days];
     newDays.push(dayData);
     dispatch(newDaySuccess(newDays));
 }
@@ -122,6 +124,39 @@ export const getMeals = () => async (dispatch, getState) => {
 export const mealsFail = () => {
 return {
   type: MEALS_FAIL
+}
+}
+*/
+
+export const requestUpdateDay = () => {
+    return {
+        type: REQUEST_UPDATE_DAY
+    }
+}
+
+export const updateDaySuccess = (currentDay, days) => {
+    return {
+        type: UPDATE_DAY_SUCCESS,
+        currentDay,
+        days
+    }
+}
+
+export const updateDay = (newDay) => async (dispatch, getState) => {
+    const state = getState();
+    dispatch(requestUpdateDay());
+    await api.updateDay(state.auth.token, newDay)
+    let newDays = [...state.menu.days];
+    newDays = newDays.map(item => {
+        return item._id === newDay._id ? newDay : item;
+    })
+    dispatch(updateDaySuccess(newDay, newDays));
+}
+
+/*
+export const updateDayFail = () => {
+return {
+  type: UPDATE_DAY_FAIL
 }
 }
 */

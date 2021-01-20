@@ -1,0 +1,15 @@
+.update-meal-dialog-body {
+    height: 50%;
+}
+
+.update-meal-dialog-top [type="text"] {
+    width: 100%;
+}
+
+.update-meal-dialog-lists {
+    height: 100%;
+}
+
+.update-meal-dialog-body [type="button"] {
+    padding: 0.25em 0.25em;
+}

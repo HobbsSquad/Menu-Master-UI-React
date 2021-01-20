@@ -25,7 +25,10 @@ class NewDayDialog extends Component {
     }
 
     submitButtonHandler = () => {
-        this.props.newDay(this.state.newItem);
+        this.props.newDay({...this.state.newItem, mealSlots: this.state.newItem.mealSlots.map(item => {
+            delete item._id;
+            return item;
+        })});
         this.props.cancel();
     }
 

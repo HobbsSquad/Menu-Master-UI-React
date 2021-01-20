@@ -10,7 +10,10 @@ import {
   NEW_DAY_FAIL,
   REQUEST_MEALS,
   MEALS_SUCCESS,
-  MEALS_FAIL
+  MEALS_FAIL,
+  REQUEST_UPDATE_DAY,
+  UPDATE_DAY_SUCCESS,
+  UPDATE_DAY_FAIL
 } from "../actionTypes/menu";
 
 const initialState = {
@@ -20,7 +23,8 @@ const initialState = {
   currentDay: null,
   newDayStatus: '',
   mealsStatus: '',
-  meals: null
+  meals: null,
+  updateDayStatus: ''
 };
 
 const menu = (state = initialState, action) => {
@@ -101,6 +105,26 @@ const menu = (state = initialState, action) => {
       return {
         ...state,
         mealsStatus: 'mealsFail'
+      }
+    }
+    case REQUEST_UPDATE_DAY: {
+      return {
+        ...state,
+        updateDayStatus: 'requestingUpdateDay'
+      }
+    }
+    case UPDATE_DAY_SUCCESS: {
+      return {
+        ...state,
+        updateDayStatus: 'updateDaySuccess',
+        currentDay: action.currentDay,
+        days: action.days
+      }
+    }
+    case UPDATE_DAY_FAIL: {
+      return {
+        ...state,
+        updateDayStatus: 'updateDayFail'
       }
     }
     default:
