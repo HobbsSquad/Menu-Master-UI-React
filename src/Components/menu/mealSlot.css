@@ -1,3 +1,7 @@
 .meal-slot-container {
     margin-left: 1em;
 }
+
+.meal-slot-header {
+    display: flex;
+}

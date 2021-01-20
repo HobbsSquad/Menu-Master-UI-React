@@ -45,4 +45,14 @@ export default class MenuAPI {
     const meals = await axios.get(apiRoot + '/meal', options);
     return meals.data;
   }
+
+  async updateDay(token, newDay) {
+    const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }
+    const newDayData = await axios.put(apiRoot + '/day/' + newDay._id, newDay, options);
+    return newDayData.data;
+  }
 }
